@@ -1,39 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, IndexRoute} from 'react-router-dom';
 import Shows from '../shows';
-import ViceHeaderLogo from '../../public/images/vice_header_logo.png';
-
-// This example shows how to render two different screens
-// (or the same screen in a different context) at the same url,
-// depending on you got there.
-//
-// Click the colors and see them full screen, then "visit the
-// gallery" and click on the colors. Note the URL and the component
-// are the same as before but now we see them inside a modal
-// on top of the old screen.
 
 
-// const TopViceHeader = React.createClass({
-//   render(){
-//     return (
-//             <div>
-//               <img alt="topViceHeader" src={ViceHeaderLogo} />
-//               <h1>Shows</h1>
-//             </div>
-//       )
-//   }
-// })
-
-class TopViceHeader extends React.Component {
-  render() {
-    return (
-            <div>
-              <img alt="topViceHeader" src={ViceHeaderLogo} />
-              <h1>Shows</h1>
-            </div>
-    );
-  }
-}
 
 const Gallery = () => (
   <div>
@@ -142,7 +111,6 @@ class ModalSwitch extends React.Component {
     return (
       <div>
         <Switch location={isModal ? this.previousLocation : location}>
-          <Route path='/' component={Gallery}/>
           <Route path='/shows' component={Gallery}/>
           <Route path='/shows/img/:id' component={ImageView}/>
         </Switch>
