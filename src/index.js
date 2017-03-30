@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ModalGallery from './config/routes';
-import './index.css';
+import './App.css';
+import viceLogo from '../public/images/vice_new.ico';
 
 ReactDOM.render(
   <ModalGallery />,
-  document.getElementById('root')
+  document.getElementById('app')
 );

@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Shows from '../shows';
+import ViceHeaderLogo from '../../public/images/vice_header_logo.png';
 
 // This example shows how to render two different screens
 // (or the same screen in a different context) at the same url,
@@ -16,62 +12,48 @@ import Shows from '../shows';
 // are the same as before but now we see them inside a modal
 // on top of the old screen.
 
-const IMAGES = [
-  { id: 0, title: 'Dark Orchid', color: 'DarkOrchid' },
-  { id: 1, title: 'Lime Green', color: 'LimeGreen' },
-  { id: 2, title: 'Tomato', color: 'Tomato' },
-  { id: 3, title: 'Seven Ate Nine', color: '#789' },
-  { id: 4, title: 'Crimson', color: 'Crimson' }
-]
+const TopViceHeader = () => (
+      <div>
+        <img alt="topViceHeader" src={ViceHeaderLogo} />
+        <h1>Shows</h1>
+      </div>
+)
 
-const Thumbnail = ({ color }) =>
-  <div style={{
-    width: 50,
-    height: 50,
-    background: color
-  }}/>
-
-const Image = ({ showImage }) =>
-  <div style={{
-    width: '100%',
-    height: 400,
-  }}></div>
 
 const Gallery = () => (
   <div>
     {Shows.map(i => (
-      <Link
-        key={i.id}
-        to={{
-          pathname: `/show/${i.id}`,
+      <Link key={i.id} to={{
+          pathname: `/shows/${i.id}`,
           // this is the trick!
           state: { modal: true }
-        }}
-      >
+        }}>
+        <h1>{i.title}</h1>
         <img alt={i.title} src={i.product_image_url} />
-        <p>{i.title}</p>
       </Link>
     ))}
   </div>
 )
 
 const ImageView = ({ match }) => {
-  const image = IMAGES[parseInt(match.params.id, 10)]
-  if (!image) {
+  const show = Shows[parseInt(match.params.id, 10)]
+  console.log(show);
+  if (!show) {
     return <div>Image not found</div>
   }
 
   return (
     <div>
-      <h1>{image.title}</h1>
-      <Image color={image.color} />
+      <h1>{show.title}</h1>
+      <img alt={show.title} src={show.product_image_url} />
     </div>
   )
 }
 
 const Modal = ({ match, history }) => {
-  const image = IMAGES[parseInt(match.params.id, 10)]
-  if (!image) {
+  const show = Shows[parseInt(match.params.id, 10)]
+  console.log(show);
+  if (!show) {
     return null
   }
   const back = (e) => {
@@ -99,8 +81,7 @@ const Modal = ({ match, history }) => {
         padding: 15,
         border: '2px solid #444'
       }}>
-        <h1>{image.title}</h1>
-        <Image color={image.color} />
+        <ImageView />
         <button type='button' onClick={back}>
           Close
         </button>
@@ -146,17 +127,15 @@ class ModalSwitch extends React.Component {
     return (
       <div>
         <Switch location={isModal ? this.previousLocation : location}>
-          <Route exact path='/' component={Gallery}/>
-          <Route path='/gallery' component={Gallery}/>
-          <Route path='/img/:id' component={ImageView}/>
+          <Route path="/" component={TopViceHeader} />
+          <Route path='/shows' component={Gallery}/>
+          <Route path='/shows/img/:id' component={ImageView}/>
         </Switch>
-        {isModal ? <Route path='/img/:id' component={Modal} /> : null}
+        {isModal ? <Route path='/shows/img/:id' component={Modal} /> : null}
       </div>
     )
   }
 }
-
-
 
 const ModalGallery = () => (
   <Router>
