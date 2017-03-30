@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom';
+import Shows from '../shows';
 
 // This example shows how to render two different screens
 // (or the same screen in a different context) at the same url,
@@ -30,36 +31,24 @@ const Thumbnail = ({ color }) =>
     background: color
   }}/>
 
-const Image = ({ color }) =>
+const Image = ({ showImage }) =>
   <div style={{
     width: '100%',
     height: 400,
-    background: color
   }}></div>
-
-const Home = () => (
-  <div>
-    <Link to='/gallery'>Visit the Gallery</Link>
-    <h2>Featured Images</h2>
-    <ul>
-      <li><Link to='/img/2'>Tomato</Link></li>
-      <li><Link to='/img/4'>Crimson</Link></li>
-    </ul>
-  </div>
-)
 
 const Gallery = () => (
   <div>
-    {IMAGES.map(i => (
+    {Shows.map(i => (
       <Link
         key={i.id}
         to={{
-          pathname: `/img/${i.id}`,
+          pathname: `/show/${i.id}`,
           // this is the trick!
           state: { modal: true }
         }}
       >
-        <Thumbnail color={i.color} />
+        <img alt={i.title} src={i.product_image_url} />
         <p>{i.title}</p>
       </Link>
     ))}
@@ -157,7 +146,7 @@ class ModalSwitch extends React.Component {
     return (
       <div>
         <Switch location={isModal ? this.previousLocation : location}>
-          <Route exact path='/' component={Home}/>
+          <Route exact path='/' component={Gallery}/>
           <Route path='/gallery' component={Gallery}/>
           <Route path='/img/:id' component={ImageView}/>
         </Switch>
