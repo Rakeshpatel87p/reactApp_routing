@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link, IndexRoute} from 'react-router-dom';
 import Shows from '../shows';
 import ViceHeaderLogo from '../../public/images/vice_header_logo.png';
 
@@ -12,13 +12,28 @@ import ViceHeaderLogo from '../../public/images/vice_header_logo.png';
 // are the same as before but now we see them inside a modal
 // on top of the old screen.
 
-const TopViceHeader = () => (
-      <div>
-        <img alt="topViceHeader" src={ViceHeaderLogo} />
-        <h1>Shows</h1>
-      </div>
-)
 
+// const TopViceHeader = React.createClass({
+//   render(){
+//     return (
+//             <div>
+//               <img alt="topViceHeader" src={ViceHeaderLogo} />
+//               <h1>Shows</h1>
+//             </div>
+//       )
+//   }
+// })
+
+class TopViceHeader extends React.Component {
+  render() {
+    return (
+            <div>
+              <img alt="topViceHeader" src={ViceHeaderLogo} />
+              <h1>Shows</h1>
+            </div>
+    );
+  }
+}
 
 const Gallery = () => (
   <div>
@@ -127,7 +142,7 @@ class ModalSwitch extends React.Component {
     return (
       <div>
         <Switch location={isModal ? this.previousLocation : location}>
-          <Route path="/" component={TopViceHeader} />
+          <Route path='/' component={Gallery}/>
           <Route path='/shows' component={Gallery}/>
           <Route path='/shows/img/:id' component={ImageView}/>
         </Switch>
