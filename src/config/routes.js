@@ -2,8 +2,6 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Shows from '../shows';
 
-
-
 const Gallery = () => (
   <div>
     {Shows.map(i => (
@@ -103,13 +101,15 @@ class ModalSwitch extends React.Component {
   }
 
   render() {
-    const { location } = this.props
+    const { location } = this.props;
+    console.log('what be Modal bro ' + isModal);
     const isModal = !!(
       location.state &&
       location.state.modal &&
       this.previousLocation !== location // not initial render
     )
     return (
+      // Modal value is not changing on click
       <div>
         <Switch location={isModal ? this.previousLocation : location}>
           <Route path='/shows' component={Gallery}/>

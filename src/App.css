@@ -90,7 +90,11 @@ body {
 
 #app div {
   padding: 2%;
-  padding-top: 10%; }
+  padding-top: 10%;
+  flex-wrap: wrap;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center; }
 
 @media screen and (min-width: 749px) {
   #app div {
@@ -99,12 +103,6 @@ body {
 @media screen and (min-width: 980px) {
   #app div {
     padding-top: 5%; } }
-
-#app > div > div {
-  flex-wrap: wrap;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: center; }
 
 #app h1 {
   font-size: 28px;
