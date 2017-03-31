@@ -113,20 +113,17 @@ body {
 
         @media screen and (min-width: 749px){
             padding-top:7%;
-        }
+        };
 
          @media screen and (min-width: 980px){
             padding-top:5%;
-        }
+        };
     }
 
-    > div {
-        :hover {
-            cursor: pointer;
-        }
-        display: flex;
+    > div > div {
         flex-wrap: wrap;
         display: -webkit-flex;
+        display:flex;
         justify-content: center;
 
     }

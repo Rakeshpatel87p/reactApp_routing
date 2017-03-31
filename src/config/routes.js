@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link, IndexRoute} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Shows from '../shows';
 
 
@@ -9,11 +9,12 @@ const Gallery = () => (
     {Shows.map(i => (
       <Link key={i.id} to={{
           pathname: `/shows/${i.id}`,
-          // this is the trick!
           state: { modal: true }
         }}>
-        <h1>{i.title}</h1>
-        <img alt={i.title} src={i.product_image_url} />
+        <div id="showCards">
+          <h1>{i.title}</h1>
+          <img alt={i.title} src={i.product_image_url} />
+        </div>
       </Link>
     ))}
   </div>
